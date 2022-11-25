@@ -1,52 +1,67 @@
-import React, { Component } from 'react'
-import {savedPosts} from '../posts.json'
-import css from './css/Content.module.css'
-import Loader from './Loader'
-import PostItem from './PostItem'
+import React, { Component } from "react";
+import { savedPosts } from "../posts.json";
+import css from "./css/Content.module.css";
+import Loader from "./Loader";
+import PostItem from "./PostItem";
 
- class Content extends React.Component {
-    constructor(props) {
-      super(props)
-    
-      this.state = {
-         isLoaded: false,
-      }
-    }
-    getLoaded() {
-      console.log('getData() called')
-      setTimeout(() => {
-          console.log('data fetched')
-          this.setState({
-              isLoaded:true
-          })
-      }, 2000)
-    }
+class Content extends React.Component {
+  constructor(props) {
+    super(props);
 
-    componentDidMount() {
-      console.log('getLoaded mount')
-      this.getLoaded()
-    }
+    this.state = {
+      isLoaded: false,
+      posts: [],
+    };
+  }
+  getLoaded() {
+    console.log("getData() called");
+    setTimeout(() => {
+      console.log("data fetched");
+      this.setState({
+        isLoaded: true,
+      });
+    }, 2000);
+  }
 
+  componentDidMount() {
+    console.log("getLoaded mount");
+    this.getLoaded();
+    this.setState({
+      posts: savedPosts,
+    });
+  }
+  handleChange = (event) => {
+    const name = event.target.value.toLowerCase()
+    const filteredPosts = savedPosts.filter(post => {
+      return post.name.toLowerCase().includes(name)
+   })
+   this.setState({
+    posts: filteredPosts
+   })
+}
 
   render() {
     return (
       <div className={css.Content}>
         <div className={css.TitleBar}>
-            <h1>My Photos</h1></div>
-
-            <div className={css.SearchResults}>
-            {
-                        this.state.isLoaded ?
-                        <PostItem savedPosts={savedPosts} />
-                        : <Loader />
-                    }
-            
-            </div>
-        
-
+          <h1>My Photos</h1> <form>
+          <label htmlFor="searchInput">Search:</label>
+          <input onChange={(event) => this.handleChange(event)} placeholder="by author" id="searchInput" type='search' />
+          <h4>Posts found: {this.state.posts.length}</h4>
+       
+        </form>
+           </div>
+       
+        <div className={css.SearchResults}>
+          {this.state.isLoaded ? (
+            <PostItem savedPosts={this.state.posts} />
+          ) : (
+            <Loader />
+          )}
+        </div>
       </div>
-    )
+    );
   }
 }
 
-export default Content
+export default Content;
