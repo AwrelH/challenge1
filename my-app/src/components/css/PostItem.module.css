@@ -24,3 +24,7 @@ img {
     background-color: aquamarine;
     font-size: 20px;
 }
+
+.SearchItem > .tags {
+    display: block;
+}

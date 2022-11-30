@@ -6,15 +6,20 @@ function PostItemAPI(props) {
     
   return (
     props.savedPosts.map(post => {
-      const {id, type, user, webformatURL, tags} = post
+      const {id, user, webformatURL, tags} = post
+      
         return <div className={css.SearchItem} key={id}>
-            <h2>{type}</h2>
-            <p>{user}</p>
+            
+            
             <img className={css.img} src={webformatURL} alt={'random'} />
-            <span className={css.tags}>{tags}</span>
+            <p>By: {user}</p>
+            <span className={css.tags}>{tags} </span>
+            
             <hr />
             </div>
-     })
+     } 
+
+     )
   )
 }
 
