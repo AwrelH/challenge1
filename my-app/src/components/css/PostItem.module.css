@@ -19,3 +19,8 @@ img {
     margin: auto;
     margin-bottom: 15px;
 }
+.tags {
+    padding: 5px;
+    background-color: aquamarine;
+    font-size: 20px;
+}

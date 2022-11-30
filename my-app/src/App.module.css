@@ -17,3 +17,9 @@ a {
     text-align: center;
     height: 100vh;
 }
+
+.tags {
+    padding: 5px;
+    border: 2px solid blue;
+    background-color: aquamarine;
+}
